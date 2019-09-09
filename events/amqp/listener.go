@@ -63,9 +63,16 @@ func (a *amqpEventListener) Listen(exchange string, eventNames ...string) (<-cha
 
 	go func() {
 		for msg := range msgs {
-			eventName, ok := msg.Headers["x-event-name"]
+			rawEventName, ok := msg.Headers["x-event-name"]
 			if !ok {
 				errors <- fmt.Errorf("msg did not contain x-event-name header")
+				msg.Nack(false, false)
+				continue
+			}
+			eventName, ok := rawEventName.(string)
+
+			if !ok {
+				errors <- fmt.Errorf("x-event-name header is not string but %t", rawEventName)
 
 				msg.Nack(false, false) // negative acknowledgement
 				continue
