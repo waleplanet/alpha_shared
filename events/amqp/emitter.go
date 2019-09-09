@@ -1,9 +1,12 @@
 package amqp
 
-import "github.com/streadway/amqp"
+import (
+	"github.com/streadway/amqp"
+	"github.com/waleplanet/alpha_shared/events"
+)
 
 type EventEmitter interface {
-	Emit(event Event) error
+	Emit(event events.Event) error
 }
 
 // package-private
@@ -34,7 +37,7 @@ func NewAMQPEventEmitter(conn *amqp.Connection, exchange string) (EventEmitter, 
 	return emitter, nil
 }
 
-func (a *amqpEventEmitter) Emit(event Event, exchange string) error {
+func (a *amqpEventEmitter) Emit(event events.Event, exchange string) error {
 	jsonData, err := json.Marshall(event)
 	if err != nil {
 		return err
