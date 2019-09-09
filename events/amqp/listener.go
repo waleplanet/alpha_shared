@@ -94,6 +94,7 @@ func (a *amqpEventListener) Listen(exchange string, eventNames ...string) (<-cha
 				continue
 			}
 			cevents <- event
+			msg.Ack(false)
 		}
 	}()
 
