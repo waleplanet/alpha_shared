@@ -1,12 +1,14 @@
 package amqp
 
 import (
+	"encoding/json"
+
 	"github.com/streadway/amqp"
 	"github.com/waleplanet/alpha_shared/events"
 )
 
 type EventEmitter interface {
-	Emit(event events.Event) error
+	Emit(event events.Event, exchange string) error
 }
 
 // package-private
@@ -38,7 +40,7 @@ func NewAMQPEventEmitter(conn *amqp.Connection, exchange string) (EventEmitter, 
 }
 
 func (a *amqpEventEmitter) Emit(event events.Event, exchange string) error {
-	jsonData, err := json.Marshall(event)
+	jsonData, err := json.Marshal(event)
 	if err != nil {
 		return err
 	}
@@ -48,11 +50,11 @@ func (a *amqpEventEmitter) Emit(event events.Event, exchange string) error {
 		return err
 	}
 	msg := amqp.Publishing{
-		Headers: amqpTable{
+		Headers: amqp.Table{
 			"x-event-name": event.EventName(),
-			Body:           jsonData,
-			ContentType:    "application/json",
 		},
+		Body:        jsonData,
+		ContentType: "application/json",
 	}
 
 	return channel.Publish(exchange, event.EventName(), true, true, msg)
