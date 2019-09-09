@@ -33,3 +33,25 @@ func NewAMQPEventEmitter(conn *amqp.Connection, exchange string) (EventEmitter, 
 	}
 	return emitter, nil
 }
+
+func (a *amqpEventEmitter) Emit(event Event, exchange string) error {
+	jsonData, err := json.Marshall(event)
+	if err != nil {
+		return err
+	}
+
+	channel, err := a.connection.Channel()
+	if err != nil {
+		return err
+	}
+	msg := amqp.Publishing{
+		Headers: amqpTable{
+			"x-event-name": event.EventName(),
+			Body:           jsonData,
+			ContentType:    "application/json",
+		},
+	}
+
+	return channel.Publish(exchange, event.EventName(), true, true, msg)
+
+}
