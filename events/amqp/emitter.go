@@ -57,6 +57,6 @@ func (a *amqpEventEmitter) Emit(event events.Event, exchange string) error {
 		ContentType: "application/json",
 	}
 
-	return channel.Publish(exchange, event.EventName(), true, true, msg)
+	return channel.Publish(exchange, event.EventName(), false, false, msg)
 
 }
