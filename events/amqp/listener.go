@@ -44,7 +44,7 @@ func (a *amqpEventListener) Listen(exchange string, eventNames ...string) (<-cha
 		return nil, nil, err
 	}
 
-	defer channel.Close()
+	//defer channel.Close()
 
 	for _, eventName := range eventNames {
 		if err := channel.QueueBind(a.queue, eventName, exchange, false, nil); err != nil {
@@ -63,6 +63,7 @@ func (a *amqpEventListener) Listen(exchange string, eventNames ...string) (<-cha
 
 	go func() {
 		for msg := range msgs {
+
 			rawEventName, ok := msg.Headers["x-event-name"]
 			if !ok {
 				errors <- fmt.Errorf("msg did not contain x-event-name header")
