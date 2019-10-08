@@ -5,7 +5,7 @@ import "github.com/jinzhu/gorm"
 type Wallet struct {
 	//"id": 138,
 	gorm.Model
-	CustomerID     int64   `gorm:"size:255;not null;unique"`
+	CustomerID     int64   `json:"customer_id",gorm:"size:255;not null;unique"`
 	AvailableBal   float64 `json:"available_balance"`
 	LedgerBal      float64 `json:"ledger_balance"`
 	AccountType    string  `gorm:"type:varchar(1);not null",json:"account_type"`
