@@ -9,7 +9,8 @@ type Wallet struct {
 	AvailableBal   float64 `json:"available_balance"`
 	LedgerBal      float64 `json:"ledger_balance"`
 	AccountType    string  `gorm:"type:varchar(1);not null" json:"account_type"`
-	WalletNo       string  `gorm:"type:varchar(20);not null" json:"wallet_number"`
+	WalletID       int64   `gorm:"size:255;not null" json:"id"`
+	WalletNo       int64   `gorm:"size:255;not null" json:"wallet_number"`
 	Currency       string  `gorm:"type:varchar(20);not null" json:"currency"`
 	Status         string  `json:"status"`
 	DateCreated    string  `json:"date_created"`
