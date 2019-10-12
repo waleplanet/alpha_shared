@@ -20,7 +20,7 @@ type (
 	}
 )
 
-func getHeaders(w http.ResponseWriter, r *http.Request, headers ...string) map[string]interface{} {
+func GetHeaders(w http.ResponseWriter, r *http.Request, headers ...string) map[string]interface{} {
 	var requestHeaders map[string]interface{}
 
 	var ok bool
