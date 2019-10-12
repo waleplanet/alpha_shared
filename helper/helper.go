@@ -23,7 +23,6 @@ type (
 func GetHeaders(w http.ResponseWriter, r *http.Request, headers ...string) map[string]interface{} {
 	var requestHeaders map[string]interface{}
 
-	var ok bool
 	var value string
 	for _, headerName := range headers {
 		value = r.Header.Get(headerName)
