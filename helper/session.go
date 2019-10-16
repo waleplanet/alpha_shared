@@ -1,6 +1,7 @@
 package helper
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 
@@ -19,6 +20,9 @@ func GetSession(rediStore *redistore.RediStore, r *http.Request, sessName, sessK
 	if err != nil {
 		log.Fatal(err.Error())
 	}
+
+	fmt.Printf("debug sess %v", session.Values[sessKey])
+
 	obj, ok := session.Values[sessKey].(*AuthSession)
 	return obj, ok
 }
