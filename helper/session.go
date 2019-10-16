@@ -21,7 +21,7 @@ func GetSession(rediStore *redistore.RediStore, r *http.Request, sessName, sessK
 		log.Fatal(err.Error())
 	}
 
-	fmt.Printf("debug sess %v", session.Values[sessKey])
+	fmt.Printf("debug sess %v", session.Values)
 
 	obj, ok := session.Values[sessKey].(*AuthSession)
 	return obj, ok
