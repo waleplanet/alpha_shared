@@ -1,0 +1,26 @@
+syntax = "proto3";
+package proto;
+
+
+message Model {
+  uint id = 1;
+  Time createdAt = 2;
+  Time updatedAt = 3;
+  Time deletedAt = 4;
+}
+
+message Wallet {
+  Model model = 1;
+  string userId = 2;
+  int64 customerID = 3;
+  double availableBal = 4;
+  double ledgerBal = 5;
+  string accountType = 6;
+  int64 walletID = 7;
+  string walletNo = 8;
+  string currency = 9;
+  string status = 10;
+  string dateCreated = 11;
+  string dateBalUpdated = 12;
+}
+
