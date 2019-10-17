@@ -44,9 +44,9 @@ func newPool(server string) *redis.Pool {
 func InitSessionStore(host, domain, secret string, timeout int) error {
 	var err error
 
-	if Store != nil {
-		return Store
-	}
+	//if Store != nil {
+	//		return Store
+	//	}
 	Pool = newPool(host)
 	SessionTimeOut = timeout
 	Domain = Domain
