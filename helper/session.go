@@ -57,7 +57,7 @@ func InitSessionStore(host, domain, secret string, timeout int) error {
 
 func GetSession(r *http.Request, sessName, sessKey string) (*AuthSession, bool) {
 
-	if Store != nil {
+	if Store == nil {
 		log.Fatal(fmt.Errorf("redis: redistore is null"))
 	}
 
@@ -72,7 +72,7 @@ func GetSession(r *http.Request, sessName, sessKey string) (*AuthSession, bool) 
 	return obj, ok
 }
 func SaveSession(r *http.Request, w http.ResponseWriter, sessName, sessKey string, sessObj interface{}) error {
-	if Store != nil {
+	if Store == nil {
 		log.Fatal(fmt.Errorf("redis: redistore is null"))
 	}
 	session, err := Store.Get(r, sessName)
