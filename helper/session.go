@@ -41,7 +41,7 @@ func newPool(server string) *redis.Pool {
 		},
 	}
 }
-func InitSessionStore(server, port, domain, secret string, timeout int) {
+func InitSessionStore(server, port, domain, secret string, timeout int) error {
 	var err error
 
 	if Store != nil {
@@ -51,9 +51,7 @@ func InitSessionStore(server, port, domain, secret string, timeout int) {
 	SessionTimeOut = timeout
 	Domain = Domain
 	Store, err = redistore.NewRediStoreWithPool(Pool, []byte(secret))
-	if err != nil {
-		panic(err)
-	}
+	return err
 	//return Store
 }
 
