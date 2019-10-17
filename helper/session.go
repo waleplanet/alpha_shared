@@ -77,7 +77,7 @@ func GetSession(r *http.Request, sessName, sessKey string) (*AuthSession, bool) 
 
 	return obj, ok
 }
-func SaveSession(r *http.Request, w http.ResponseWriter, sessName, sessKey string, sessObj interface{}) error {
+func SaveSession(r *http.Request, w http.ResponseWriter, sessName, sessKey string, sessObj *AuthSession) error {
 	if Store == nil {
 		log.Fatal(fmt.Errorf("redis: redistore is null"))
 	}
