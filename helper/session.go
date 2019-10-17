@@ -66,7 +66,9 @@ func GetSession(r *http.Request, sessName, sessKey string) (*AuthSession, bool) 
 		log.Fatal(err.Error())
 	}
 
-	fmt.Printf("debug sess %v", session.Values)
+	fmt.Printf("sess key : %s \n", sessKey)
+	fmt.Printf("store options %v \n ", Store.Options)
+	fmt.Printf("debug sess %v \n ", session.Values)
 
 	obj, ok := session.Values[sessKey].(*AuthSession)
 	return obj, ok
