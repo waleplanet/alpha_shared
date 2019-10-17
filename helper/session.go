@@ -54,7 +54,7 @@ func InitSessionStore(server, port, domain, secret string, timeout int) {
 	if err != nil {
 		panic(err)
 	}
-	return Store
+	//return Store
 }
 
 func GetSession(r *http.Request, sessName, sessKey string) (*AuthSession, bool) {
