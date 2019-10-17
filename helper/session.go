@@ -67,7 +67,7 @@ func GetSession(r *http.Request, sessName, sessKey string) (*AuthSession, bool) 
 		log.Fatal(err.Error())
 	}
 
-	fmt.Printf("session %v \n", session)
+	fmt.Printf("get session %v \n", session)
 	fmt.Printf("sess key : %s \n", sessKey)
 	fmt.Printf("sess name: %s \n", sessName)
 	fmt.Printf("store options %v \n ", Store.Options)
@@ -89,6 +89,7 @@ func SaveSession(r *http.Request, w http.ResponseWriter, sessName, sessKey strin
 	if err != nil {
 		log.Fatal(err.Error())
 	}
+	fmt.Printf("save session %v \n", session)
 
 	session.Values[sessKey] = sessObj
 	session.Options = &sessions.Options{
