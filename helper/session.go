@@ -41,13 +41,13 @@ func newPool(server string) *redis.Pool {
 		},
 	}
 }
-func InitSessionStore(server, port, domain, secret string, timeout int) error {
+func InitSessionStore(host, domain, secret string, timeout int) error {
 	var err error
 
 	if Store != nil {
 		return Store
 	}
-	Pool = newPool(fmt.Sprintf("%s:%s", server, port))
+	Pool = newPool(host)
 	SessionTimeOut = timeout
 	Domain = Domain
 	Store, err = redistore.NewRediStoreWithPool(Pool, []byte(secret))
