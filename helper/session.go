@@ -44,16 +44,12 @@ func newPool(server string) *redis.Pool {
 func InitSessionStore(host, domain, secret string, timeout int) error {
 	var err error
 
-	//if Store != nil {
-	//		return Store
-	//	}
 	Pool = newPool(host)
 	SessionTimeOut = timeout
 	Domain = Domain
 	Store, err = redistore.NewRediStoreWithPool(Pool, []byte(secret))
 	Store.DefaultMaxAge = SessionTimeOut
 	return err
-	//return Store
 }
 
 func GetSession(r *http.Request, sessName, sessKey string) (*AuthSession, bool) {
@@ -67,19 +63,8 @@ func GetSession(r *http.Request, sessName, sessKey string) (*AuthSession, bool) 
 		log.Fatal(err.Error())
 	}
 
-	fmt.Printf("get session %v \n", session)
-	fmt.Printf("sess key : %s \n", sessKey)
-	fmt.Printf("sess name: %s \n", sessName)
-	fmt.Printf("store options %v \n ", Store.Options)
-	fmt.Printf("debug sess %v \n ", session.Values[sessKey])
-
 	obj, ok := session.Values[sessKey].(*AuthSession)
-	fmt.Printf("debug obj %v \n ", obj)
-
 	return obj, ok
-	//return &AuthSession{
-	//Session:
-	//}
 }
 func SaveSession(r *http.Request, w http.ResponseWriter, sessName, sessKey string, sessObj *AuthSession) error {
 	if Store == nil {
@@ -89,8 +74,6 @@ func SaveSession(r *http.Request, w http.ResponseWriter, sessName, sessKey strin
 	if err != nil {
 		log.Fatal(err.Error())
 	}
-	fmt.Printf("save session %v \n", session)
-
 	session.Values[sessKey] = sessObj
 	session.Options = &sessions.Options{
 		Domain:   Domain,
@@ -100,10 +83,5 @@ func SaveSession(r *http.Request, w http.ResponseWriter, sessName, sessKey strin
 	}
 
 	err = sessions.Save(r, w)
-	fmt.Printf("save sess key : %s \n", sessKey)
-	fmt.Printf("save sess name: %s \n", sessName)
-
-	fmt.Printf("save session %v \n", session.Values[sessKey])
-	fmt.Printf("saved obj %v \n", sessObj)
 	return err
 }
