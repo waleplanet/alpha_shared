@@ -94,7 +94,7 @@ func SaveSession(r *http.Request, w http.ResponseWriter, sessName, sessKey strin
 		HttpOnly: true,
 	}
 
-	err = session.Save(r, w)
+	err = sessions.Save(r, w)
 	fmt.Printf("save sess key : %s \n", sessKey)
 	fmt.Printf("save sess name: %s \n", sessName)
 
