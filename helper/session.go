@@ -51,6 +51,7 @@ func InitSessionStore(host, domain, secret string, timeout int) error {
 	SessionTimeOut = timeout
 	Domain = Domain
 	Store, err = redistore.NewRediStoreWithPool(Pool, []byte(secret))
+	Store.DefaultMaxAge = SessionTimeOut
 	return err
 	//return Store
 }
