@@ -70,3 +70,20 @@ func DecodeRequestData(w http.ResponseWriter, r *http.Request, payload interface
 	}
 	return err
 }
+func DisplayApiError(w http.ResponseWriter, message, response_code string, data interface{}, code int) {
+	errObj := struct {
+		Message      string
+		Data         interface{}
+		ResponseCode string
+	}{
+		message,
+		data,
+		response_code,
+	}
+
+	w.Header().Set("Content-Type", "application/json; charset=utf-8")
+	w.WriteHeader(code)
+	if j, err := json.Marshal(errObj); err == nil {
+		w.Write(j)
+	}
+}
