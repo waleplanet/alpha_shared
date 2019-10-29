@@ -58,6 +58,7 @@ func GetSession(r *http.Request, sessName, sessKey string) (*AuthSession, bool) 
 		log.Fatal(fmt.Errorf("redis: redistore is null"))
 	}
 
+	fmt.Printf("request: %v", r.Cookies())
 	session, err := Store.Get(r, sessName)
 	if err != nil {
 		log.Fatal(err.Error())
