@@ -62,6 +62,7 @@ func GetSession(r *http.Request, sessName, sessKey string) (*AuthSession, bool) 
 	session, err := Store.Get(r, sessName)
 
 	if err != nil {
+		fmt.Printf("Store %v \n", store)
 		fmt.Printf("Session %v \n", session)
 		log.Println(err.Error())
 		return nil, false
