@@ -56,23 +56,11 @@ func GetSession(r *http.Request, sessName, sessKey string) (*AuthSession, bool) 
 
 	if Store == nil {
 		log.Fatal(fmt.Errorf("redis: redistore is null"))
-
 	}
 
 	session, err := Store.Get(r, sessName)
-
 	if err != nil {
-		fmt.Printf("Store %v \n", Store)
-		fmt.Printf("Session %v \n", session)
-		fmt.Printf("Session %v \n", session.Values)
-		fmt.Printf("get session %v \n", session)
-		fmt.Printf("sess key : %s \n", sessKey)
-		fmt.Printf("sess name: %s \n", sessName)
-		fmt.Printf("store options %v \n ", Store.Options)
-		fmt.Printf("debug sess %v \n ", session.Values[sessKey])
-
-		log.Println(err.Error())
-		return nil, false
+		log.Fatal(err.Error())
 	}
 
 	obj, ok := session.Values[sessKey].(*AuthSession)
