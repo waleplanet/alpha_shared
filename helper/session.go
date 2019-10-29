@@ -44,10 +44,10 @@ func newPool(server string) *redis.Pool {
 func InitSessionStore(host, domain, secret string, timeout int) error {
 	var err error
 
-	//	Pool = newPool(host)
+	Pool = newPool(host)
 	SessionTimeOut = timeout
 	Domain = Domain
-	Store, err = redistore.NewRediStore(10, "tcp", host, "", []byte(secret))
+	Store, err = redistore.NewRediStoreWithPool(Pool, host, []byte(secret))
 	Store.DefaultMaxAge = SessionTimeOut
 	return err
 }
