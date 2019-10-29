@@ -56,11 +56,13 @@ func GetSession(r *http.Request, sessName, sessKey string) (*AuthSession, bool) 
 
 	if Store == nil {
 		log.Fatal(fmt.Errorf("redis: redistore is null"))
+
 	}
 
 	session, err := Store.Get(r, sessName)
 	if err != nil {
-		log.Fatal(err.Error())
+		log.Println(err.Error())
+		return nil, false
 	}
 
 	obj, ok := session.Values[sessKey].(*AuthSession)
