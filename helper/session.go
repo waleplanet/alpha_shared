@@ -66,7 +66,7 @@ func GetSession(r *http.Request, sessName, sessKey string) (*AuthSession, bool) 
 	}*/
 
 	//fmt.Printf("request: %v", r.Cookies())
-	Store, err = redistore.NewRediStoreWithPool(Pool, []byte(Secret))
+	Store, err := redistore.NewRediStoreWithPool(Pool, []byte(Secret))
 	session, err := Store.Get(r, sessName)
 	if err != nil {
 		log.Fatal(err.Error())
@@ -79,7 +79,7 @@ func SaveSession(r *http.Request, w http.ResponseWriter, sessName, sessKey strin
 	/*if Store == nil {
 		log.Fatal(fmt.Errorf("redis: redistore is null"))
 	}*/
-	Store, err = redistore.NewRediStoreWithPool(Pool, []byte(secret))
+	Store, err := redistore.NewRediStoreWithPool(Pool, []byte(Secret))
 	session, err := Store.Get(r, sessName)
 	if err != nil {
 		log.Fatal(err.Error())
