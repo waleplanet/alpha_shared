@@ -13,10 +13,10 @@ import (
 )
 
 var (
-	Pool   *redis.Pool
-	Store  *redistore.RediStore
-	Domain string
-	//Secret         string
+	Pool           *redis.Pool
+	Store          *redistore.RediStore
+	Domain         string
+	Secret         string
 	SessionTimeOut int
 )
 
@@ -41,7 +41,7 @@ func newPool(server string) *redis.Pool {
 		},
 	}
 }
-func InitStoreVars(host, domain, secret, timeout) {
+func InitStoreVars(host, domain, secret string, timeout int) {
 	Domain = domain
 	Host = host
 	Secret = secret
