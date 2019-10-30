@@ -43,7 +43,6 @@ func newPool(server string) *redis.Pool {
 }
 func InitStoreVars(host, domain, secret string, timeout int) {
 	Domain = domain
-	Host = host
 	Secret = secret
 	SessionTimeOut = timeout
 	Pool = newPool(host)
@@ -67,12 +66,12 @@ func GetSession(r *http.Request, sessName, sessKey string) (*AuthSession, bool) 
 	}*/
 
 	//fmt.Printf("request: %v", r.Cookies())
-	Store, err = redistore.NewRediStoreWithPool(Pool, []byte(secret))
+	Store, err = redistore.NewRediStoreWithPool(Pool, []byte(Secret))
 	session, err := Store.Get(r, sessName)
 	if err != nil {
 		log.Fatal(err.Error())
 	}
-	fmt.Fprintf(" session on get %v \n from url %v", session, r.URL.String())
+	fmt.Printf(" session on get %v \n from url %v", session, r.URL.String())
 	obj, ok := session.Values[sessKey].(*AuthSession)
 	return obj, ok
 }
@@ -94,7 +93,7 @@ func SaveSession(r *http.Request, w http.ResponseWriter, sessName, sessKey strin
 	}
 
 	err = sessions.Save(r, w)
-	fmt.Fprintf(" session on save %v \n from url %v", session, r.URL.String())
+	fmt.Printf(" session on save %v \n from url %v", session, r.URL.String())
 
 	return err
 }
