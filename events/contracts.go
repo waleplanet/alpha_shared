@@ -17,3 +17,6 @@ type PasswordReset struct {
 func (e *UserCreatedEvent) EventName() string {
 	return "user.created"
 }
+func (e *PasswordReset) EventName() string {
+	return "user.reset_password"
+}
