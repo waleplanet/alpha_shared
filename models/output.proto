@@ -13,8 +13,11 @@ message Model {
 message UserId {
   string userId =1;
 }
+message WalletArg{
+  string userId =1;
+  string email = 2;
+}
 message WalletMsg {
-  Model model = 1;
   string userId = 2;
   int64 customerID = 3;
   string accountType = 6;
@@ -25,5 +28,5 @@ message WalletMsg {
 }
 
 service WalletService{
-rpc GetUserWallet(UserId) returns (WalletMsg) {}
+rpc GetUserWallet(WalletArg) returns (WalletMsg) {}
 }
