@@ -19,9 +19,9 @@ message WalletArg{
 }
 message WalletMsg {
   string userId = 2;
-  int64 customerID = 3;
+  double customerID = 3;
   string accountType = 6;
-  int64 walletID = 7;
+  double walletID = 7;
   string walletNo = 8;
   string currency = 9;
   string dateCreated = 11;
