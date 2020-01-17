@@ -30,7 +30,7 @@ func RandStringWithCharSet(length int, charset string) string {
 func RandInt(length int) string {
 	b := make([]byte, length)
 	for i := range b {
-		b[i] = intset[seedRand.Intn(len(charset))]
+		b[i] = intset[seedRand.Intn(len(intset))]
 	}
 	return string(b)
 }
