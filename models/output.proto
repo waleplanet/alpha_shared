@@ -20,6 +20,7 @@ message WalletArg{
 message WalletMsg {
   string userId = 2;
   double customerID = 3;
+  double accountBal = 10;
   string accountType = 6;
   double walletID = 7;
   string walletNo = 8;
