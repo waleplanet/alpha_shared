@@ -9,9 +9,8 @@ import (
 
 type (
 	ErrorObj struct {
-		Error      string `json:"error"`
-		Message    string `json:"message"`
-		HttpStatus int    `json:"status"`
+		Error   string `json:"error"`
+		Message string `json:"message"`
 	}
 
 	HttpResponse struct {
@@ -40,9 +39,8 @@ func GetHeaders(r *http.Request, headers ...string) map[string]interface{} {
 }
 func DisplayAppError(w http.ResponseWriter, err error, message string, code int) {
 	errObj := ErrorObj{
-		Error:      err.Error(),
-		Message:    message,
-		HttpStatus: code,
+		Error:   err.Error(),
+		Message: message,
 	}
 
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
