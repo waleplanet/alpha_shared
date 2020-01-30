@@ -85,6 +85,8 @@ func (a *amqpEventListener) Listen(exchange string, eventNames ...string) (<-cha
 				event = new(events.UserCreatedEvent)
 			case "user.reset_password":
 				event = new(events.PasswordReset)
+			case "otp.created":
+				event = new(events.OTPCreated)
 			default:
 				errors <- fmt.Errorf("event type %s is unknown", eventName)
 				continue
