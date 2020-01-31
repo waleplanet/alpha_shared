@@ -6,6 +6,11 @@ type UserCreatedEvent struct {
 	Token string `json:"token"`
 	Host  string `json:"host"`
 }
+type WelcomeUserEvent struct {
+	ID    string `json:"id"`
+	Email string `json:"email""`
+	Host  string `json:"host"`
+}
 
 type PasswordReset struct {
 	ID    string `json:"id"`
@@ -30,4 +35,8 @@ func (e *PasswordReset) EventName() string {
 
 func (e *OTPCreated) EventName() string {
 	return "otp.created"
+}
+
+func (e *WelcomeUserEvent) EventName() string {
+	return "user.welcome"
 }
