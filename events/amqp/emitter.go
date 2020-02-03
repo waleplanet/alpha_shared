@@ -2,6 +2,7 @@ package amqp
 
 import (
 	"encoding/json"
+	"fmt"
 
 	"github.com/streadway/amqp"
 	"github.com/waleplanet/alpha_shared/events"
@@ -56,7 +57,7 @@ func (a *amqpEventEmitter) Emit(event events.Event, exchange string) error {
 		Body:        jsonData,
 		ContentType: "application/json",
 	}
-
+	fmt.Printf("emit msg %s \n", msg)
 	return channel.Publish(exchange, event.EventName(), false, false, msg)
 
 }
