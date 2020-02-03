@@ -79,7 +79,7 @@ func (a *amqpEventListener) Listen(exchange string, eventNames ...string) (<-cha
 				continue
 			}
 			var event events.Event
-
+			fmt.Println(eventName)
 			switch eventName {
 			case "user.created":
 				event = new(events.UserCreatedEvent)
