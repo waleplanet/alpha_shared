@@ -6,12 +6,13 @@ package models
 import (
 	context "context"
 	fmt "fmt"
+	math "math"
+
 	proto "github.com/golang/protobuf/proto"
 	timestamp "github.com/golang/protobuf/ptypes/timestamp"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
-	math "math"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -26,10 +27,10 @@ var _ = math.Inf
 const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type Model struct {
-	Id                   uint32               `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	CreatedAt            *timestamp.Timestamp `protobuf:"bytes,2,opt,name=createdAt,proto3" json:"createdAt,omitempty"`
-	UpdatedAt            *timestamp.Timestamp `protobuf:"bytes,3,opt,name=updatedAt,proto3" json:"updatedAt,omitempty"`
-	DeletedAt            *timestamp.Timestamp `protobuf:"bytes,4,opt,name=deletedAt,proto3" json:"deletedAt,omitempty"`
+	Id                   uint32               `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
+	CreatedAt            *timestamp.Timestamp `protobuf:"bytes,2,opt,name=createdAt,proto3" json:"createdAt"`
+	UpdatedAt            *timestamp.Timestamp `protobuf:"bytes,3,opt,name=updatedAt,proto3" json:"updatedAt"`
+	DeletedAt            *timestamp.Timestamp `protobuf:"bytes,4,opt,name=deletedAt,proto3" json:"deletedAt"`
 	XXX_NoUnkeyedLiteral struct{}             `json:"-"`
 	XXX_unrecognized     []byte               `json:"-"`
 	XXX_sizecache        int32                `json:"-"`
@@ -89,7 +90,7 @@ func (m *Model) GetDeletedAt() *timestamp.Timestamp {
 }
 
 type UserId struct {
-	UserId               string   `protobuf:"bytes,1,opt,name=userId,proto3" json:"userId,omitempty"`
+	UserId               string   `protobuf:"bytes,1,opt,name=userId,proto3" json:"userId"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -128,8 +129,8 @@ func (m *UserId) GetUserId() string {
 }
 
 type WalletArg struct {
-	UserId               string   `protobuf:"bytes,1,opt,name=userId,proto3" json:"userId,omitempty"`
-	Email                string   `protobuf:"bytes,2,opt,name=email,proto3" json:"email,omitempty"`
+	UserId               string   `protobuf:"bytes,1,opt,name=userId,proto3" json:"userId"`
+	Email                string   `protobuf:"bytes,2,opt,name=email,proto3" json:"email"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -175,15 +176,15 @@ func (m *WalletArg) GetEmail() string {
 }
 
 type WalletMsg struct {
-	UserId               string   `protobuf:"bytes,2,opt,name=userId,proto3" json:"userId,omitempty"`
-	CustomerID           float64  `protobuf:"fixed64,3,opt,name=customerID,proto3" json:"customerID,omitempty"`
-	AccountBal           float64  `protobuf:"fixed64,10,opt,name=accountBal,proto3" json:"accountBal,omitempty"`
-	LedgerBal            float64  `protobuf:"fixed64,12,opt,name=ledgerBal,proto3" json:"ledgerBal,omitempty"`
-	AccountType          string   `protobuf:"bytes,6,opt,name=accountType,proto3" json:"accountType,omitempty"`
-	WalletID             float64  `protobuf:"fixed64,7,opt,name=walletID,proto3" json:"walletID,omitempty"`
-	WalletNo             string   `protobuf:"bytes,8,opt,name=walletNo,proto3" json:"walletNo,omitempty"`
-	Currency             string   `protobuf:"bytes,9,opt,name=currency,proto3" json:"currency,omitempty"`
-	DateCreated          string   `protobuf:"bytes,11,opt,name=dateCreated,proto3" json:"dateCreated,omitempty"`
+	UserId               string   `protobuf:"bytes,2,opt,name=userId,proto3" json:"userId"`
+	CustomerID           float64  `protobuf:"fixed64,3,opt,name=customerID,proto3" json:"customerID"`
+	AccountBal           float64  `protobuf:"fixed64,10,opt,name=accountBal,proto3" json:"accountBal"`
+	LedgerBal            float64  `protobuf:"fixed64,12,opt,name=ledgerBal,proto3" json:"ledgerBal"`
+	AccountType          string   `protobuf:"bytes,6,opt,name=accountType,proto3" json:"accountType"`
+	WalletID             float64  `protobuf:"fixed64,7,opt,name=walletID,proto3" json:"walletID"`
+	WalletNo             string   `protobuf:"bytes,8,opt,name=walletNo,proto3" json:"walletNo"`
+	Currency             string   `protobuf:"bytes,9,opt,name=currency,proto3" json:"currency"`
+	DateCreated          string   `protobuf:"bytes,11,opt,name=dateCreated,proto3" json:"dateCreated"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
