@@ -18,3 +18,5 @@ type Wallet struct {
 	DateCreated    string `json:"date_created"`
 	DateBalUpdated string `json:"date_balance_updated"`
 }
+
+
